@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Configuration et dépendances -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tableau de Bord : Impact de l'IA</title>
+    <script src="./src/dependancies/d3.min.js" defer></script>
+    <script src="./src/dependancies/plotly-2.14.0.min.js" defer></script>
+    <script type="module" src="./index.js" defer></script>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script>
+      // Gestion de la modale d'analyse
+      function ouvrirAnalyse(btn) {
+        const contenuSource =
+          btn.nextElementSibling.querySelector(".analyse").innerHTML;
+
+        document.getElementById("texte-modal").innerHTML = contenuSource;
+
+        document.getElementById("modal-analyse").classList.add("active");
+      }
+
+      function fermerAnalyse() {
+        document.getElementById("modal-analyse").classList.remove("active");
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("modal-analyse");
+        if (event.target == modal) {
+          fermerAnalyse();
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <!-- Conteneur principal de l'application -->
+    <div class="conteneur-app">
+      <!-- Barre latérale de navigation -->
+      <aside class="barre-laterale">
+        <div class="entete-barre-laterale">
+          <h1>Impact de l'IA<br />Dashboard</h1>
+          <p>Analyse de l'impact de l'IA sur l'économie et la société</p>
+        </div>
+
+        <nav class="nav-graphiques">
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="#graphique1">1. Volume vs Part de Marché</a></li>
+            <li><a href="#graphique2">2. Productivité vs Adoption</a></li>
+            <li><a href="#graphique3">3. Performance des Outils</a></li>
+            <li><a href="#graphique4">4. Chômage vs Adoption</a></li>
+            <li><a href="#graphique5">5. Collaboration vs Chômage</a></li>
+            <li><a href="#graphique6">6. Collaboration par Industrie</a></li>
+          </ul>
+        </nav>
+
+        <div class="pied-barre-laterale"></div>
+      </aside>
+
+      <!-- Zone de contenu principal avec les graphiques -->
+      <main class="contenu-principal">
+        <!-- Section Graphique 1 : Volume vs Revenus -->
+        <section class="section-graphique">
+          <div class="texte-graphique">
+            <h2>1. Dominance Globale (Volume vs Revenus)</h2>
+            <p class="question">
+              Le volume de contenu IA généré se traduit-il en revenus réels ?
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende fond-degrade-viridis degrade"></span>
+                <span>Volume (Couleur)</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende point" style="border: 1px solid #fff; background: transparent;"></span>
+                <span>Pays</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende point" style="width: 16px; height: 16px; background: rgba(255,255,255,0.2);"></span>
+                <span>Revenus (Taille)</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                Ce graphique montre que si les géants de la tech dominent par le volume, ce n'est pas le seul facteur de succès.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>Volume = Part de Marché :</strong> En général, plus une entreprise produit de données, plus elle capte de parts de marché.<br />
+                - <strong>Le plafond de verre :</strong> Produire plus ne garantit pas indéfiniment plus de revenus. La qualité et la pertinence du contenu deviennent vite décisives.<br />
+                - <strong>Stratégie actuelle :</strong> Le marché favorise encore la "force brute" (gros volumes), mais cela pourrait changer à mesure que l'IA se spécialise.
+              </p>
+            </div>
+          </div>
+          <div id="graphique1" class="conteneur-graphique"></div>
+        </section>
+
+        <!-- Section Graphique 2 : Productivité -->
+        <section class="section-graphique inverse">
+          <div class="texte-graphique">
+            <h2>2. Matrice de Productivité</h2>
+            <p class="question">
+              Quels pays sont les "Leaders" (Forte Adoption & Fort Volume) ?
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende point fond-ciel"></span>
+                <span>Pays (Adoption vs Volume)</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende ligne" style="background: #94a3b8; border-bottom: 1px dashed #94a3b8; height: 0;"></span>
+                <span>Moyenne</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                L'adoption de l'IA n'est pas la même partout. Ce graphique révèle deux stratégies nationales distinctes.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>Les Leaders :</strong> Les pays avec une forte adoption (>70%) voient leur production de contenu exploser.<br />
+                - <strong>L'Efficacité avant tout :</strong> Certains pays produisent énormément avec moins d'utilisateurs. Ils ciblent probablement des secteurs clés (code, médias) plutôt que de viser une adoption de masse immédiate.<br />
+                - <strong>Adoption "creuse" :</strong> Une forte adoption sans production massive peut signaler une utilisation de l'IA pour des tâches internes (prédiction, logistique) plutôt que créatives.
+              </p>
+            </div>
+          </div>
+          <div id="graphique2" class="conteneur-graphique"></div>
+        </section>
+
+        <!-- Section Graphique 3 : Performance Outils -->
+        <section class="section-graphique">
+          <div class="texte-graphique">
+            <h2>3. Performance Économique des Outils</h2>
+            <p class="question">
+              Classement des outils par Impact sur les Revenus (ROI)
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende fond-emeraude"></span>
+                <span>Hausse Revenus</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende fond-indigo"></span>
+                <span>Part de Marché</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                Ce graphique compare la popularité des outils (parts de marché) à leur impact réel sur le chiffre d'affaires des entreprises.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>Popularité ≠ Profit :</strong> Les outils les plus connus (barres bleues) ne sont pas toujours ceux qui rapportent le plus.<br />
+                - <strong>La puissance des niches :</strong> Des outils spécialisés, bien que moins utilisés globalement, peuvent générer des hausses de revenus spectaculaires (barres vertes) pour ceux qui les utilisent.<br />
+                - <strong>Conseil :</strong> Pour maximiser le ROI, ne suivez pas aveuglément la foule. Cherchez l'outil adapté à votre métier spécifique.
+              </p>
+            </div>
+          </div>
+          <div id="graphique3" class="conteneur-graphique"></div>
+        </section>
+
+        <!-- Section Graphique 4 : Chômage vs Adoption -->
+        <section class="section-graphique inverse">
+          <div class="texte-graphique">
+            <h2>4. Chômage vs Adoption (Analyse de Tendance)</h2>
+            <p class="question">
+              La réalité statistique derrière la peur du chômage technologique.
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende point fond-ardoise" style="opacity: 0.5"></span>
+                <span>Données Pays</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende ligne fond-rouge"></span>
+                <span>Tendance Moyenne</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                La relation entre IA et chômage est plus complexe qu'on ne le pense. Ce graphique croise taux d'adoption et pertes d'emplois.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>Pas de lien direct :</strong> Une forte adoption de l'IA n'entraîne pas systématiquement un chômage massif. De nombreux pays combinent haute technologie et plein emploi.<br />
+                - <strong>Résilience :</strong> Le marché du travail s'adapte. Les emplois ne disparaissent pas tous, ils se transforment.<br />
+                - <strong>Exceptions :</strong> Les points extrêmes montrent que les politiques d'accompagnement jouent un rôle crucial pour amortir le choc technologique.
+              </p>
+            </div>
+          </div>
+          <div id="graphique4" class="conteneur-graphique"></div>
+        </section>
+
+        <!-- Section Graphique 5 : Collaboration vs Chômage -->
+        <section class="section-graphique">
+          <div class="texte-graphique">
+            <h2>5. Collaboration vs Chômage (Analyse de Tendance)</h2>
+            <p class="question">
+              L'IA collaborative protège-t-elle mieux l'emploi ?
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende point fond-ardoise" style="opacity: 0.5"></span>
+                <span>Données Industrie</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende ligne fond-rouge"></span>
+                <span>Tendance Moyenne</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                L'IA doit-elle remplacer ou aider l'humain ? Ce graphique apporte une réponse statistique claire.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>L'union fait la force :</strong> Il existe une corrélation visible : plus la collaboration Humain-IA est forte, moins les pertes d'emplois sont importantes.<br />
+                - <strong>L'IA Copilote :</strong> L'intégration de l'IA comme outil d'assistance (et non de remplacement) est la meilleure stratégie pour protéger l'emploi.<br />
+                - <strong>L'Upskilling :</strong> Former les employés à travailler <i>avec</i> l'IA est plus efficace que de chercher à automatiser leur poste.
+              </p>
+            </div>
+          </div>
+          <div id="graphique5" class="conteneur-graphique"></div>
+        </section>
+
+        <!-- Section Graphique 6 : Heatmap Industrie -->
+        <section class="section-graphique inverse">
+          <div class="texte-graphique">
+            <h2>6. Resilience par Industrie (Heatmap)</h2>
+            <p class="question">
+              Quelles industries collaborent le mieux tout en préservant
+              l'emploi ?
+            </p>
+            <div class="boite-legende">
+              <div class="element-legende">
+                <span class="marqueur-legende fond-degrade-rdylgn degrade"></span>
+                <span>Risque Chômage (Blanc=Haut, Rouge=Bas)</span>
+              </div>
+              <div class="element-legende">
+                <span class="marqueur-legende" style="background: #ccc; width: 20px; height: 6px;"></span>
+                <span>Taux de Collaboration</span>
+              </div>
+            </div>
+            <button class="btn-analyse" onclick="ouvrirAnalyse(this)">
+              Voir l'analyse
+            </button>
+            <div class="source-analyse" style="display: none">
+              <p class="analyse">
+                <strong>Analyse :</strong><br /><br />
+                Certaines industries réussissent mieux leur transition. Ce classement montre qui collabore le mieux.
+                <br /><br />
+                <strong>Points Clés :</strong><br />
+                - <strong>Les Champions :</strong> La Tech et les industries créatives mènent la danse. Elles ont intégré l'IA comme un prolongement de la compétence humaine.<br />
+                - <strong>Les risques :</strong> Les secteurs en bas de liste cherchent souvent l'automatisation pure, ce qui augmente le risque social sans forcément garantir l'efficacité.<br />
+                - <strong>Tendance :</strong> L'avenir appartient aux métiers qui sauront hybrider compétence humaine et puissance de calcul.
+              </p>
+            </div>
+          </div>
+          <div id="graphique6" class="conteneur-graphique"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modale d'affichage des analyses -->
+    <div id="modal-analyse" class="superposition-modal">
+      <div class="boite-modal">
+        <span class="btn-fermer" onclick="fermerAnalyse()">&times;</span>
+        <h3>Analyse du Graphique</h3>
+        <div id="texte-modal" class="texte-contenu-modal">
+          <!-- Le contenu est injecté via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
